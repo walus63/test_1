@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="todo-container">
+        <h1>Lista rzeczy do zrobienia</h1>
+        <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie">
+        <button id="add-todo">Dodaj</button>
+
+        <ul id="todo-list">
+        </ul>
+    </div>
+      <script>
+          
+// Sprawdzamy, czy dokument HTML jest załadowany
+$(document).ready(function() {
+
+    // Kiedy klikniemy przycisk "Dodaj"
+    $('#add-todo').click(function() {
+        
+        // Pobierz tekst z pola tekstowego
+        let zadanieTekst = $('#todo-input').val();
+        
+        // Jeśli pole tekstowe nie jest puste
+        if (zadanieTekst !== '') {
+            
+            // Tworzymy nowy element listy (<li>) z tekstem zadania
+            let noweZadanie = $('<li></li>').text(zadanieTekst);
+            
+            // Tworzymy przycisk do usuwania zadania
+            let przyciskUsun = $('<button>Usuń</button>');
+            
+            // Kiedy klikniemy "Usuń", zadanie zostanie usunięte
+            przyciskUsun.click(function() {
+                $(this).parent().remove(); // Usuwa cały element <li>
+            });
+            
+            // Dodajemy przycisk "Usuń" do nowego zadania
+            noweZadanie.append(przyciskUsun);
+            
+            // Dodajemy nowe zadanie do listy
+            $('#todo-list').append(noweZadanie);
+            
+            // Czyścimy pole tekstowe
+            $('#todo-input').val('');
+        }
+    });
+});
+
+</script>
+</body>
+</html>
